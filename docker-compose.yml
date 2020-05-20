@@ -7,6 +7,3 @@ services:
     restart: unless-stopped
     ports:
       - "80:80"
-      - "443:443"
-      - "5000:5000"
-      - "8080:8080"
