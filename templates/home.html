@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block content %}
+  <div class="jumbo">
+    <h2>YouTube Audio Downloader</h2>
+
+    <form action="/" method="POST" onsubmit="this.submit(); this.reset(); return false;">
+      <div>
+        <label for="url">URL:</label>
+        <input type="url" id="url" name="url">
+        <input type="submit" value="Download!">
+      </div>
+    </form>
+    
+    <p>Please wait at most a minute or two after submitting for your file to download!</p>
+  </div>
+{% endblock %}
