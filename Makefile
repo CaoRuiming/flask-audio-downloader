@@ -1,7 +1,7 @@
 IMAGE_NAME = yt2audio
 
 build:
-	docker rmi $(IMAGE_NAME)
+	# docker rmi `docker images -qa -f 'dangling=true'`
 	docker build -t $(IMAGE_NAME) .
 
 up:

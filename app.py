@@ -1,5 +1,4 @@
-import os, time
-import youtube_dl
+import os, time, youtube_dl
 from pathlib import Path
 from flask import Flask, render_template, request, send_file
 
