@@ -1,25 +1,27 @@
-import sys, os, shutil, time
-from flask import Flask, render_template, request, send_file
+import os, time
 import youtube_dl
+from pathlib import Path
+from flask import Flask, render_template, request, send_file
 
 app = Flask(__name__, static_url_path='', static_folder='static', template_folder='templates')
-app.config['DOWNLOADS'] = os.path.join(app.root_path, 'tmp')
+downloads_dir = Path(app.root_path) / 'tmp'
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-    # clear downloads older than 5 minutes
     try:
-        for file in os.listdir(app.config['DOWNLOADS']):
-            filepath = os.path.join(app.config['DOWNLOADS'], file)
+        # make the downloads directory if it does not already exist
+        downloads_dir.mkdir(exist_ok=True)
+
+        # clear downloads older than 5 minutes
+        for filepath in downloads_dir.iterdir():
             if (time.time() - os.stat(filepath).st_ctime) > 300:
-                if os.path.isfile(filepath):
-                    os.remove(filepath)
+                filepath.unlink(missing_ok=True)
     except Exception as e:
-        print(e)
+        print('[Downloads Directory]', e)
 
     if request.method == 'POST':
         ydl_opts = {
-            'outtmpl': f'{app.config["DOWNLOADS"]}/%(title)s.%(ext)s',
+            'outtmpl': f'{downloads_dir}/%(title)s.%(ext)s',
             'format': 'bestaudio/best',
             'postprocessors': [{
                 'key': 'FFmpegExtractAudio',
@@ -33,22 +35,14 @@ def home():
 
             # get download name and change the extension from webm to m4a
             info = ydl.extract_info(url, download=False)
-            download_name = ydl.prepare_filename(info)
-            download_name = download_name.split('.')
-            download_name[-1] = 'm4a'
-            download_name = '.'.join(download_name)
+            download_name = Path(ydl.prepare_filename(info)).with_suffix('.m4a')
 
             ydl.download([url])
 
         return send_file(download_name, as_attachment=True)
-    
+
     return render_template('home.html')
 
 
 if __name__ == '__main__':
-    try:
-        shutil.rmtree('tmp', ignore_errors=True)
-        os.mkdir('tmp')
-    except Exception as e:
-        print(e)
     app.run(debug=True, port=5000)

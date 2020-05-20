@@ -3,64 +3,46 @@ body {
     padding: 0;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #444;
+    background-color: white;
 }
-   
-/*
-* Create dark grey header with a white logo
-*/
-    
-header {
-    background-color: #2B2B2B;
-    height: 35px;
-    width: 100%;
-    opacity: .9;
-    margin-bottom: 10px;
+@media (prefers-color-scheme: dark) {
+    body {
+        color: white;
+        background: #444;
+    }
 }
-   
-header h1.logo {
-    margin: 0;
-    font-size: 1.7em;
-    color: #fff;
-    text-transform: uppercase;
-    float: left;
-}
-   
-header h1.logo:hover {
-    color: #fff;
-    text-decoration: none;
-}
-   
-/*
-* Center the body content
-*/
-    
-.container {
+ 
+main {
     max-width: 940px;
-    width: 100%;
-    margin: 0 auto;
+    margin: 30px auto;
+    padding: 10px;
+    text-align: center;
 }
    
-div.jumbo {
-    padding: 10px 0 30px 0;
-    background-color: #eeeeee;
-    text-align: center;
-    -webkit-border-radius: 6px;
-       -moz-border-radius: 6px;
-            border-radius: 6px;
-}
-   
-h2 {
-    font-size: 3em;
-    margin-top: 40px;
-    text-align: center;
-    letter-spacing: -2px;
+h1 {
+    font-size: 3rem;
 }
    
 p, label {
-    font-size: 1.7em;
+    font-size: 1.7rem;
     font-weight: 500;
-    margin-top: 30px;
-    text-align: center;
-    letter-spacing: -1px;
     color: #999;
+}
+
+input[type=url], input[type=submit] {
+    padding: 15px;
+    margin: 8px 0;
+    font-size: 1.4rem;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=url]:focus {
+    border-color:#333;
+}
+
+input[type=submit]:hover {
+    cursor: pointer;
+    background-color: #ccc;
 }

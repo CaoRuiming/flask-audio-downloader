@@ -1,5 +1,8 @@
+IMAGE_NAME = yt2audio
+
 build:
-	docker build -t yt2audio .
+	docker rmi $(IMAGE_NAME)
+	docker build -t $(IMAGE_NAME) .
 
 up:
 	docker-compose up -d
@@ -8,7 +11,7 @@ down:
 	docker-compose down
 
 logs:
-	docker logs yt2audio
+	docker logs $(IMAGE_NAME)
 
 shell:
-	docker exec -it yt2audio bash
+	docker exec -it $(IMAGE_NAME) bash
