@@ -1,5 +1,5 @@
 FROM ubuntu:20.04
-LABEL maintainer="Raymond Cao <raymond_cao@brown.edu>"
+LABEL maintainer="Raymond Cao"
 ENV TZ=America/New_York
 RUN apt-get update -y
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y python3 python3-dev python3-pip ffmpeg nginx
