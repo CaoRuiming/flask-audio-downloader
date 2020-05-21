@@ -27,6 +27,10 @@ For Docker stuff, there's a handy `Makefile` included with the following command
 - `make logs`: prints logs from app container
 - `make shell`: opens bash shell into app container; app files are in /app; use ctrl-D to exit
 
+## Known Issues
+
+Building the Docker image will fail if done on an armhf system (e.g. any [Raspberry Pi](https://www.raspberrypi.org/)). This is a [known issue](https://bugs.launchpad.net/ubuntu/+source/glibc/+bug/1867675) with the Ubuntu 20.04 image. If you want to build this image on something like a Raspberry Pi, change the first line in `Dockerfile` so that `ubuntu:18.04` is used as the base image instead of `ubuntu:20.04`.
+
 ## Cool Related Projects
 
 - [YoutubeDL-Material](https://github.com/Tzahi12345/YoutubeDL-Material)

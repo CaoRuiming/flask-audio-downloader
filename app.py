@@ -14,7 +14,7 @@ def home():
         # clear downloads older than 5 minutes
         for filepath in downloads_dir.iterdir():
             if (time.time() - os.stat(filepath).st_ctime) > 300:
-                filepath.unlink(missing_ok=True)
+                filepath.unlink()
     except Exception as e:
         print('[Downloads Directory]', e)
 
