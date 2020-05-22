@@ -3,7 +3,7 @@ from pathlib import Path
 from flask import Flask, render_template, request, send_file
 
 app = Flask(__name__, static_url_path='', static_folder='static', template_folder='templates')
-downloads_dir = Path(app.root_path) / 'tmp'
+downloads_dir = Path(app.root_path) / 'downloads'
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -32,11 +32,11 @@ def home():
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             url = request.values.get('url')
 
-            # get download name and change the extension from webm to m4a
+            # download if files does not already exist
             info = ydl.extract_info(url, download=False)
             download_name = Path(ydl.prepare_filename(info)).with_suffix('.m4a')
-
-            ydl.download([url])
+            if not download_name.exists():
+                ydl.download([url])
 
         return send_file(download_name, as_attachment=True)
 

@@ -29,7 +29,7 @@ For Docker stuff, there's a handy `Makefile` included with the following command
 
 ## Known Issues
 
-Building the Docker image will fail if done on an armhf system (e.g. any [Raspberry Pi](https://www.raspberrypi.org/)). This is a [known issue](https://bugs.launchpad.net/ubuntu/+source/glibc/+bug/1867675) with the Ubuntu 20.04 image. If you want to build this image on something like a Raspberry Pi, change the first line in `Dockerfile` so that `ubuntu:18.04` is used as the base image instead of `ubuntu:20.04`.
+Building the Docker image will fail if done on an armhf system (e.g. any [Raspberry Pi](https://www.raspberrypi.org/)). This is a [known issue](https://bugs.launchpad.net/ubuntu/+source/glibc/+bug/1867675) with the Ubuntu 20.04 image. If you want to build this image on something like a Raspberry Pi, make sure that the first line in `Dockerfile` uses `ubuntu:18.04` as the base image instead of `ubuntu:20.04` (this may already be changed).
 
 ## Cool Related Projects
 
